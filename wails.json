@@ -1,0 +1,22 @@
+{
+  "$schema": "https://wails.io/schemas/v2.json",
+  "name": "PhoneInfoga Desktop",
+  "outputfilename": "phoneinfoga-desktop",
+  "frontend:dev:watcher": "npm run dev",
+  "frontend:dev:serverURL": "http://localhost:5173",
+  "frontend:build:command": "npm run build",
+  "frontend:path": "frontend",
+  "platform": {
+    "windows": {
+      "webview2": {
+        "distributor": "microsoft"
+      }
+    },
+    "linux": {},
+    "darwin": {
+      "bundle": {
+        "identifier": "com.yourorg.phoneinfoga"
+      }
+    }
+  }
+}
