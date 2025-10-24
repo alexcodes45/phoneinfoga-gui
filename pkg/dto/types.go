@@ -9,6 +9,7 @@ type ScanRequest struct {
 }
 
 type ScanResponse struct {
-	ScanID int    `json:"scanId"`
+	JobID  string `json:"jobId"`
 	Status string `json:"status"`
+	Number string `json:"number"`
 }

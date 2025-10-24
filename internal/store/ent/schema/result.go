@@ -2,20 +2,32 @@ package schema
 
 import (
 	"entgo.io/ent"
+	"entgo.io/ent/schema/edge"
 	"entgo.io/ent/schema/field"
 )
 
-type Result struct{ ent.Schema }
+// Result stores structured data parsed from a PhoneInfoga response.
+type Result struct {
+	ent.Schema
+}
 
 func (Result) Fields() []ent.Field {
 	return []ent.Field{
-		field.Int("scan_id"),
-		field.String("country").Default(""),
-		field.String("region").Default(""),
-		field.String("carrier").Default(""),
-		field.String("line_type").Default(""),
-		field.String("reputation").Default("{}"),
-		field.String("sources").Default("[]"),
-		field.String("notes").Default(""),
+		field.String("country").Optional().Nillable(),
+		field.String("region").Optional().Nillable(),
+		field.String("carrier").Optional().Nillable(),
+		field.String("line_type").Optional().Nillable(),
+		field.JSON("reputation", map[string]any{}).Optional().Nillable(),
+		field.JSON("sources", []map[string]any{}).Optional().Nillable(),
+		field.Text("notes").Optional().Nillable(),
+	}
+}
+
+func (Result) Edges() []ent.Edge {
+	return []ent.Edge{
+		edge.From("scan", Scan.Type).
+			Ref("results").
+			Unique().
+			Required(),
 	}
 }
